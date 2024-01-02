@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hardmonkey</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav_style.css">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="/public/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <meta name="description"
+        content="Encuentra hardware de calidad, impresoras y PCs de alto rendimiento en nuestra tienda en línea. Ofrecemos una amplia gama de productos tecnológicos para tus necesidades informáticas. ¡Compra hoy y mejora tu experiencia digital!">
+
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7JX7NGJF2X"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-7JX7NGJF2X');
+</script>
+
+<body>
+    <header>
+
+        <nav class="navbar">
+            <a href="index.html"><div class="logo contenedor"  href="index.html">
+                <img href="index.html" src="./img/monkey.png" alt="Logo Pokédex">
+                <h1 >HardMonkey</h1>
+            </div></a>
+            <div class="menu">
+                <div class="menu-links">
+                    <a href='index.html#sectionpc'>PC</a>
+                    <a href="index.html#section1">Impresoras</a>
+                    <!-- <a href="#sectionmonitor">Monitores</a> -->
+                    <a href="index.html#tecnico">Soporte Tecnico</a>
+
+                    <!--  <a href="">Quienes somos</a> -->
+                </div>
+        </nav>
+    </header>
+
+
+    <h1>Detalles del Producto</h1>
+    <div id="product-details" class="contenido"></div>
+    <!-- aca dexcripcion del producto -->
+
+    <footer class="">
+        <a href='https://www.linkedin.com/in/zekecabre/' target="_blank">ZekeCabre</a>
+    </footer>
+    <script src="list-note.js"></script>
+    <script src="list-impre.js"></script>
+    <script>
+        // Función para obtener los parámetros de consulta de la URL
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Recupera el modelo del producto a partir del parámetro de consulta
+        const productModel = getQueryParam('product');
+
+        // Encuentra el producto en el array 'pcs' basado en el modelo
+        const product = pcs.find(pc => pc.MODELO === productModel);
+
+        if (product) {
+            // Muestra los detalles del producto en la página
+            const productDetailsDiv = document.getElementById('product-details');
+            productDetailsDiv.innerHTML = `
+                <img  class="imgdescri"  src="${product.IMAGEN}" style="mix-blend-mode: multiply; background-color: transparent;" alt="Imagen del Producto">
+                <div>
+                <h2>${product.MARCA || ''} ${product.MODELO || ''}</h2>
+                <p class="price">${product["PRECIO U$D"] ? `$${product["PRECIO U$D"]}` : ''} USD</p>
+                <ul>
+                    <li>${product.RAM ? `${product.RAM} GB de memoria ram` : ''}</li>
+                    <li>${product.DISCO ? `${product.DISCO} GB de almacenamiento` : ''}</li>
+                    <li>${product.OBSERVACION ? `${product.OBSERVACION}` : ''}</li>
+                </ul>
+                <button class="buy-impre-button" onclick="sendWhatsAppMessage('${product.MARCA || ''} ${product.MODELO || ''}')">Comprar</button>
+                </div>`;
+        } else {
+            // Maneja el caso en el que el producto no se encuentra
+            alert('Producto no encontrado');
+        }
+    </script>
+
+</body>
+
+</html>

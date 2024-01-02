@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hardmonkey</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav_style.css">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="/public/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <meta name="description"
+        content="Encuentra hardware de calidad, impresoras y PCs de alto rendimiento en nuestra tienda en línea. Ofrecemos una amplia gama de productos tecnológicos para tus necesidades informáticas. ¡Compra hoy y mejora tu experiencia digital!">
+
+</head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7JX7NGJF2X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7JX7NGJF2X');
+</script>
+
+<body>
+    <header>
+
+        <nav class="navbar">
+            <a href="index.html"><div class="logo contenedor"  href="index.html">
+                <img href="index.html" src="./img/monkey.png" alt="Logo Pokédex">
+                <h1 >HardMonkey</h1>
+            </div></a>
+            <div class="menu">
+                <div class="menu-links">
+                    <a href='index.html#sectionpc'>PC</a>
+                    <a href="index.html#section1">Impresoras</a>
+                    <!-- <a href="#sectionmonitor">Monitores</a> -->
+                    <a href="index.html#tecnico">Soporte Tecnico</a>
+
+                    <!--  <a href="">Quienes somos</a> -->
+                </div>
+        </nav>
+    </header>
+    <h1>Detalles del Producto</h1>
+
+    <div id="impre-details" class="contenido">
+        <!-- Aquí se mostrarán los detalles de la impresora -->
+    </div>
+
+
+
+
+    <footer class="">
+        <a href='https://www.linkedin.com/in/zekecabre/' target="_blank">ZekeCabre</a>
+    </footer>
+    <script src="list-note.js"></script>
+    <script src="list-impre.js"></script>
+    <script>
+        // Función para obtener los parámetros de consulta de la URL
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Recupera el modelo de la impresora a partir del parámetro de consulta
+        const impresoraModel = getQueryParam('model');
+
+        // Encuentra la impresora en el array 'impres' basado en el modelo
+        const impresora = impres.find(impre => impre.MODELO === impresoraModel);
+
+        if (impresora) {
+            // Muestra los detalles de la impresora en la página
+            const impreDetailsDiv = document.getElementById('impre-details');
+            impreDetailsDiv.innerHTML = `
+                <img style="mix-blend-mode: multiply; background-color: transparent;" class="imgdescri" src="${impresora.IMAGEN}" alt="Imagen de la Impresora">
+                <div>
+                <h2>${impresora.MARCA || ''} ${impresora.MODELO || ''}</h2>
+                <p class="price">${impresora.PRECIO ? `$${impresora.PRECIO}` : ''} ARS</p>
+
+                
+                <ul>
+                    <li> ${impresora.GARANTIA ? `${impresora.GARANTIA} meses de garantía` : ''}</li>
+                    <li></li>
+
+                    
+                    </ul>
+                    <button class="buy-impre-button" onclick="sendWhatsAppMessage('${impresora.MARCA || ''} ${impresora.MODELO || ''}')">Comprar</button>
+            </div>`;
+        } else {
+            // Maneja el caso en el que la impresora no se encuentra
+            alert('Impresora no encontrada');
+        }
+    </script>
+
+</body>
+
+</html>
